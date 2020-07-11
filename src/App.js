@@ -66,7 +66,7 @@ function App() {
     <div style={{textAlign:'center'}}>    
     <Header/>
     <>
-    <h1> Pick a Template O' Meme Lord</h1>
+    <h1> HeY!! Pick a Template O' Meme Lord</h1>
     {template && <form onSubmit={async e=>{
       e.preventDefault();
       const params={
