@@ -1,11 +1,14 @@
 import React ,{useState,useEffect}from 'react';
 import Axios from "axios";
-import {Button} from "reactstrap"
+import {Button,Col,Row,Container,Grid} from "reactstrap"
 import DownloadLink from "react-download-link";
 import Header from './Components/Header';
 import TextBox from './Components/TextBox';
 import Meme from './Components/Meme';
 import { useHistory } from "react-router-dom";
+import { FacebookShareButton,
+  InstapaperShareButton,TwitterShareButton,
+   WhatsappShareButton, FacebookIcon, InstapaperIcon,WhatsappIcon,} from "react-share"
 import './App.css';
 
 const objectToQueryParam = obj => {
@@ -33,12 +36,6 @@ function App() {
  const data=response.data;
  console.log(data.data.memes)
  setMeme(data.data.memes);
-
- 
-       
-     
-       
-
    }
 
    fetchmeme();
@@ -49,23 +46,22 @@ function App() {
      
       <div style={{ textAlign: "center" }}>
       <Header/>
-        <img style={{ width: 400 }} src={maymay} alt="" />
+        <img style={{ width: 400 }} src={maymay} alt="" to="/"/>
         <h3>Click Below and save the meme</h3>
-        
-
         <Button onClick={downloadFile}>Download</Button>
-
-
-
+        <FacebookShareButton url={maymay}><FacebookIcon/></FacebookShareButton>
+        <WhatsappShareButton url={maymay}><WhatsappIcon/></WhatsappShareButton>
         {console.log(maymay)}
       </div>
     );
   }
 
   return (
-    <div style={{textAlign:'center'}}>    
+     
+    <div >   
+   
     <Header/>
-    <>
+  
     <h1> HeY!! Pick a Template O' Meme Lord</h1>
     {template && <form onSubmit={async e=>{
       e.preventDefault();
@@ -93,18 +89,25 @@ function App() {
       
       </form> 
     }
-    {!template && meme.map(template=>{
-     return( <Meme template={template}
+    <Container>
+     <Row xs={1} md={2}>
+    {
+        !template && meme.map(template=>{
+          
+         
+          return (
+            <Col sm>
+      <Meme template={template}
         onClick={()=>{
           setTemplate(template);
-        }}/>)
-        
-    })}
+        }}/>
+        </Col>
+          
+        )})}</Row></Container>
 
-    </>
     </div>
+      
 
-   
   );
 }
 
